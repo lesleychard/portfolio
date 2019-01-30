@@ -1,6 +1,9 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import Home from './pages';
+import {
+    Home,
+    MyWork,
+} from './pages';
 
 export default function Routes() {
     return (
@@ -9,6 +12,11 @@ export default function Routes() {
                 exact
                 path="/"
                 component={Home}
+            />
+            <Route
+                exact
+                path="/my-work"
+                component={MyWork}
             />
         </Switch>
     );
