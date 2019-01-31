@@ -1,16 +1,19 @@
 import {darken, lighten} from '../style-utils';
 
-const PRIMARY = '#0C0C0C';
+const PRIMARY = '#0A1633';
 const SECONDARY = '#0135C8';
 
 const WHITE = '#fff';
 // const BLACK = '#0C0C0C';
 
 const palette = {
+    background: {
+        main: '#ECECEC',
+    },
     primary: {
         contrastText: WHITE,
-        dark: darken(PRIMARY, 0.25),
-        light: lighten(PRIMARY, 2),
+        dark: '#040917',
+        light: lighten(PRIMARY, 0.5),
         main: PRIMARY,
     },
     secondary: {

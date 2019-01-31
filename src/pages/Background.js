@@ -2,15 +2,17 @@ import {makeStyles} from '@material-ui/styles';
 import React from 'react';
 
 
-const useStyles = makeStyles(({
-    root: {},
+const useStyles = makeStyles(theme => ({
+    root: {
+        color: theme.palette.common.white,
+    },
 }));
 
-export default function Home() {
+export default function Background() {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            Homepage
+            Background
         </div>
     );
 }
