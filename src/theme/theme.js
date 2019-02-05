@@ -11,6 +11,7 @@ import React, {PureComponent} from 'react';
 
 import {
     globals,
+    layout,
     palette,
     transitions,
     typography,
@@ -21,6 +22,7 @@ jss.use(jssExtend());
 jss.setup(jssPreset());
 
 const MUI_THEME = createMuiTheme({
+    layout,
     palette,
     transitions,
     typography,

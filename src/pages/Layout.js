@@ -9,7 +9,7 @@ import {
     LOCATION_WHAT_I_DO,
 } from '../location';
 
-const backgroundImg = require('../assets/img/main-background.jpg');
+const HOME_BACKGROUND_IMG = require('../assets/img/main-background.jpg');
 
 const styles = theme => ({
     root: {
@@ -22,6 +22,7 @@ const styles = theme => ({
         display: 'flex',
         minWidth: '100vw',
         transition: `transform ${theme.transitions.duration.layout}ms`,
+        willChange: 'transform',
         '& > div': {
             flex: '0 0 100vw',
             minHeight: '100vh',
@@ -57,9 +58,55 @@ const styles = theme => ({
         transform: 'translate(0, -100vh)',
     },
     main: {
-        background: `${theme.palette.primary.light} url(${backgroundImg}) no-repeat center center`,
-        backgroundSize: 'cover',
+        background: `url(${HOME_BACKGROUND_IMG}) no-repeat -10rem center`,
+        backgroundSize: 'auto 100%',
         height: '100vh',
+        position: 'relative',
+        [theme.breakpoints.up('sm')]: {
+            backgroundPositionX: '-5rem',
+        },
+        [theme.breakpoints.up('md')]: {
+            backgroundPositionX: '0',
+        },
+        '&:before, &:after': {
+            animation: `fade-in ${theme.transitions.duration.layout * 4}ms ${theme.transitions.duration.layout * 2}ms forwards`,
+            background: `linear-gradient(135deg, transparent, ${theme.palette.primary.dark})`,
+            bottom: 0,
+            content: '""',
+            display: 'block',
+            left: 0,
+            opacity: 0.25,
+            pointerEvents: 'none',
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            zIndex: 1,
+        },
+        '&:after': {
+            animation: `fade-in ${theme.transitions.duration.layout * 6}ms ${theme.transitions.duration.layout * 2}ms forwards`,
+            background: `linear-gradient(120deg, transparent 0%, transparent 55%, ${theme.palette.primary.main} 110%, ${theme.palette.primary.main} 100%);`,
+            left: '50vw',
+            opacity: 0,
+            zIndex: 1,
+        },
+    },
+    mainContentWrapper: {
+        position: 'relative',
+        zIndex: 2,
+        '&:before': {
+            animation: `fade-in ${theme.transitions.duration.layout * 4}ms ${theme.transitions.duration.layout * 2}ms forwards`,
+            background: `linear-gradient(35deg, transparent 0%, transparent 60%, ${theme.palette.secondary.dark} 160%, ${theme.palette.secondary.dark} 100%);`,
+            content: '""',
+            height: '100vh',
+            display: 'block',
+            left: 0,
+            opacity: 0.25,
+            pointerEvents: 'none',
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            zIndex: 0,
+        },
     },
     bottom: {
         background: theme.palette.primary.main,
@@ -132,7 +179,9 @@ class Layout extends PureComponent {
                             )}
                         >
                             <div className={classes.main}>
-                                {main}
+                                <div className={classes.mainContentWrapper}>
+                                    {main}
+                                </div>
                             </div>
                             <div className={classes.bottom}>
                                 {bottom}
