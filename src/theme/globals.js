@@ -1,7 +1,8 @@
-import {fontFaces} from '.';
+import {animations, fontFaces} from '.';
 
 const globals = theme => ({
     '@global': {
+        ...animations,
         ...fontFaces,
         '*': {
             boxSizing: 'border-box',
