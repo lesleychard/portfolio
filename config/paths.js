@@ -12,6 +12,7 @@ function resolve(relativePath) {
 
 module.exports = {
     build: resolve('build'),
+    data: resolve('data'),
     indexHtml: resolve('public/index.html'),
     indexJs: resolve('src/index.js'),
     public: resolve('public'),

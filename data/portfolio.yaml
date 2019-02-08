@@ -1,0 +1,52 @@
+portfolio:
+- title: IcebergFinder.com
+  slug: iceberg-finder
+  description: Lorem ipsum dolor sit amet.
+  tags:
+    - 0
+    - 1
+- title: Bluedrop UI Library
+  slug: bluedrop-ui-library
+  description: Lorem ipsum dolor sit amet.
+  tags:
+    - 0
+    - 1
+    - 2
+- title: LesleyChard.com
+  slug: personal-website
+  description: Lorem ipsum dolor sit amet.
+  tags:
+    - 0
+    - 1
+    - 2
+- title: MySkillsPass.com
+  slug: my-skills-pass
+  description: Lorem ipsum dolor sit amet.
+  tags:
+    - 0
+    - 1
+    - 2
+- title: Paint the Town Colouring Contest
+  slug: paint-the-town
+  description: Lorem ipsum dolor sit amet.
+  tags:
+    - 0
+    - 1
+    - 2
+- title: BroaderPalette.ca
+  slug: broader-palette
+  description: Lorem ipsum dolor sit amet.
+  tags:
+    - 0
+- title: ThinkCNA.ca
+  slug: think-cna
+  description: Lorem ipsum dolor sit amet.
+  tags:
+    - 0
+    - 1
+- title: CNAStores.ca
+  slug: cna-stories
+  description: Lorem ipsum dolor sit amet.
+  tags:
+    - 0
+    - 1

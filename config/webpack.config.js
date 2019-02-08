@@ -85,6 +85,11 @@ module.exports = {
                     },
                 },
             },
+            {
+                test: /\.yaml$/,
+                include: paths.data,
+                loader: 'js-yaml-loader',
+            },
         ],
     },
     plugins: [

@@ -25,6 +25,9 @@ const palette = {
         light: lighten(SECONDARY, 0.6),
         main: SECONDARY,
     },
+    text: {
+        primary: BLACK,
+    },
 };
 
 export default palette;

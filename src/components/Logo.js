@@ -13,8 +13,8 @@ const styles = {
         maxWidth: '100%',
     },
     sizeSmall: {
-        width: 165,
-        height: 26,
+        width: 185,
+        height: 30,
     },
     sizeMedium: {
         width: 250,

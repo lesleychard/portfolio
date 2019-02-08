@@ -35,13 +35,16 @@ const styles = theme => ({
     },
     liVisible: {},
     liBottom: {
-        bottom: 0,
-        left: '50%',
-        transform: 'translate(-50%, 100%)',
+        bottom: '1.5rem',
+        left: 0,
+        transform: 'translate(100%, 200%)',
         transition: `transform ${theme.transitions.duration.standard}ms`,
         willChange: 'transform',
         '&$liVisible': {
-            transform: 'translate(-50%, 0)',
+            transform: 'translate(0, 0)',
+        },
+        [theme.breakpoints.up('sm')]: {
+            left: '3vw',
         },
     },
     liLeft: {
@@ -49,19 +52,28 @@ const styles = theme => ({
         top: '30%',
         transform: 'translateY(-50%)',
         [theme.breakpoints.up('sm')]: {
+            left: '-1.5rem',
             top: '45%',
         },
     },
     liRight: {
         right: 0,
         top: '30%',
-        transform: 'translateY(-50%)',
+        transform: 'translate(100%, -50%)',
+        transition: `transform ${theme.transitions.duration.standard}ms`,
+        willChange: 'transform',
         [theme.breakpoints.up('sm')]: {
+            right: '-1.5rem',
             top: '45%',
+        },
+        '&$liVisible': {
+            transform: 'translate(0, -50%)',
         },
     },
     liTop: {
-        transform: 'translateY(-100%)',
+        left: '1rem',
+        top: '2rem',
+        transform: 'translateY(-200%)',
         transition: `transform ${theme.transitions.duration.standard}ms`,
         '&$liVisible': {
             transform: 'translateY(0)',
@@ -69,6 +81,12 @@ const styles = theme => ({
     },
     routerNavLink: {
         pointerEvents: 'all',
+    },
+    logo: {
+        [theme.breakpoints.up('lg')]: {
+            width: 220,
+            height: 35,
+        },
     },
 });
 
@@ -83,6 +101,15 @@ class Nav extends PureComponent {
             classes,
             location,
         } = this.props;
+
+        let bottomDirection = 'bottom';
+        if (location.pathname === `/${LOCATION_BACKGROUND}`) {
+            bottomDirection = 'bottom-right';
+        }
+        if (location.pathname === `/${LOCATION_MY_WORK}`) {
+            bottomDirection = 'bottom-left';
+        }
+
         return (
             <nav className={classes.root}>
                 <ul className={classes.ul}>
@@ -100,7 +127,10 @@ class Nav extends PureComponent {
                             exact
                             to="/"
                         >
-                            <Logo />
+                            <Logo
+                                className={classes.logo}
+                                size="small"
+                            />
                         </RouterNavLink>
                     </li>
                     <li
@@ -108,7 +138,7 @@ class Nav extends PureComponent {
                             classes.li,
                             classes.liRight,
                             {
-                                [classes.liHome]: location.pathname === '/',
+                                [classes.liVisible]: location.pathname !== `/${LOCATION_MY_WORK}`,
                             },
                         )}
                     >
@@ -123,9 +153,6 @@ class Nav extends PureComponent {
                         className={classNames(
                             classes.li,
                             classes.liLeft,
-                            {
-                                [classes.liHome]: location.pathname === '/',
-                            },
                         )}
                     >
                         <NavLink
@@ -149,7 +176,7 @@ class Nav extends PureComponent {
                         )}
                     >
                         <NavLink
-                            direction="bottom"
+                            direction={bottomDirection}
                             exact
                             to={`/${LOCATION_WHAT_I_DO}`}
                         >
