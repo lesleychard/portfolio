@@ -69,14 +69,6 @@ module.exports = {
                 },
             },
             {
-                test: /\.json$/,
-                use: [
-                    {
-                        loader: 'json-loader',
-                    },
-                ],
-            },
-            {
                 test: /\.svg$/,
                 use: {
                     loader: 'svg-url-loader',
@@ -86,9 +78,20 @@ module.exports = {
                 },
             },
             {
-                test: /\.yaml$/,
-                include: paths.data,
-                loader: 'js-yaml-loader',
+                test: /\.json$/,
+                use: [
+                    {
+                        loader: 'json-loader',
+                    },
+                ],
+            },
+            {
+                test: /\.(yml|yaml)$/,
+                use: [
+                    {
+                        loader: 'yaml-loader',
+                    },
+                ],
             },
         ],
     },

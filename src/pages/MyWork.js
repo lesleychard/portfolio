@@ -1,20 +1,17 @@
+import axios from 'axios';
 import {
-    // Grid,
+    CircularProgress,
     Typography,
 } from '@material-ui/core';
-import {makeStyles} from '@material-ui/styles';
-import React from 'react';
+import {withStyles, withTheme} from '@material-ui/styles';
+import PropTypes from 'prop-types';
+import React, {PureComponent} from 'react';
 
-// import {PortfolioCard} from '../components';
+import {PortfolioCard} from '../components';
 
-/**
- * @todo
- * use yaml-loader to dynamically fetch files from data directory using redux
- */
+import portfolioData from '../../data/portfolio.yaml';
 
-// const ICEBERG_FINDER_MEDIA = require('../assets/img/portfolio/iceberg-finder/thumbnail.png');
-
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
     '@keyframes my-work-typography-h1-before-in': {
         from: {
             width: '0%',
@@ -24,55 +21,150 @@ const useStyles = makeStyles(theme => ({
         },
     },
     root: {
-        margin: '10vh 15vw 4rem',
+        margin: '6rem 0 5rem 1.5rem',
+        [theme.breakpoints.up('sm')]: {
+            margin: '10vh 15vw 4rem',
+        },
     },
     typographyH1: {
         animation: `fade-drop-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy}ms forwards`,
-        paddingBottom: '3rem',
-        marginBottom: '3rem',
+        fontSize: '1.4em',
+        marginBottom: '1rem',
         opacity: 0,
+        paddingBottom: '1rem',
         position: 'relative',
-        textAlign: 'right',
-        width: '30vw',
         '&:before': {
             animation: `$my-work-typography-h1-before-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy}ms forwards`,
             content: '""',
             background: theme.palette.common.black,
             bottom: 0,
-            height: 3,
+            height: 1,
             left: 0,
             position: 'absolute',
             width: 0,
         },
+        [theme.breakpoints.up('sm')]: {
+            fontSize: theme.typography.h1.fontSize,
+            marginBottom: '3rem',
+            paddingBottom: '3rem',
+            textAlign: 'right',
+            width: '30vw',
+            '&:before': {
+                height: 3,
+            },
+        },
+    },
+    loadingContainer: {
+        animation: `fade-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy}ms forwards`,
+        opacity: 0,
+        textAlign: 'center',
+        width: '30vw',
+    },
+    typographyLoading: {
+        fontStyle: 'italic',
+        marginTop: '1rem',
     },
     portfolioCardContainer: {
-
+        marginRight: '1.5rem',
+        [theme.breakpoints.up('sm')]: {
+            marginRight: 0,
+        },
     },
-}));
+    portfolioCard: {
+        animation: `fade-glide-right-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy}ms forwards`,
+        opacity: 0,
+    },
+});
 
-export default function MyWork() {
-    const classes = useStyles();
-    return (
-        <div className={classes.root}>
-            <Typography
-                className={classes.typographyH1}
-                variant="h1"
-            >
-                My Work
-            </Typography>
-            <div className={classes.portfolioCardContainer}>
+class MyWork extends PureComponent {
+    static propTypes = {
+        classes: PropTypes.object.isRequired,
+        theme: PropTypes.object.isRequired,
+    };
+
+    state = {
+        loading: true,
+        portfolio: [],
+    };
+
+    componentDidMount() {
+        axios.get(portfolioData)
+            .then((resPortfolio) => {
+                const {portfolio} = resPortfolio.data;
+                this.setState({
+                    loading: false,
+                    portfolio,
+                });
+            });
+    }
+
+    animationDelay = (cardIndex) => {
+        const {theme} = this.props;
+        const duration = theme.transitions.duration.copy;
+        return `${(duration / 1.5) + (duration * ((cardIndex + 1) / 2))}ms`;
+    }
+
+    render() {
+        const {classes} = this.props;
+        const {
+            loading,
+            portfolio,
+        } = this.state;
+        return (
+            <div className={classes.root}>
+                <Typography
+                    className={classes.typographyH1}
+                    variant="h1"
+                >
+                    My Work
+                </Typography>
                 {
-                    // PORTFOLIO_ITEMS.map(item => (
-                    //     <PortfolioCard
-                    //         description={item.description}
-                    //         // media={ICEBERG_FINDER_MEDIA}
-                    //         slug={item.slug}
-                    //         // tags={['Development', 'UI Design']}
-                    //         title={item.title}
-                    //     />
-                    // ))
+                    loading
+                        ? (
+                            <div className={classes.loadingContainer}>
+                                <CircularProgress color="secondary" />
+                                <Typography
+                                    className={classes.typographyLoading}
+                                    variant="caption"
+                                >
+                                    I&rsquo;ve got a lot of work to show you. Hang tight.
+                                </Typography>
+                            </div>
+                        )
+                        : (
+                            <div className={classes.portfolioCardContainer}>
+                                {
+                                    portfolio.map(
+                                        (
+                                            {
+                                                title,
+                                                slug,
+                                                description,
+                                                tags,
+                                            },
+                                            index,
+                                        ) => (
+                                            <PortfolioCard
+                                                className={classes.portfolioCard}
+                                                description={description}
+                                                key={slug}
+                                                media={`img/portfolio/${slug}/thumbnail.png`}
+                                                slug={slug}
+                                                style={{
+                                                    animationDelay: this.animationDelay(index),
+                                                }}
+                                                tags={tags}
+                                                title={title}
+                                            />
+                                        ),
+                                    )
+                                }
+                            </div>
+                        )
                 }
             </div>
-        </div>
-    );
+        );
+    }
 }
+
+export default withStyles(styles)(withTheme()(MyWork));
