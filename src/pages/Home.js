@@ -11,6 +11,7 @@ import {
     NavLink,
     Logo,
     SocialLinks,
+    Tagline,
 } from '../components';
 import {LOCATION_WHAT_I_DO} from '../location';
 import {fontSmooth} from '../style-utils';
@@ -138,17 +139,15 @@ const styles = (theme) => {
                 },
             },
         },
-        typographySub: {
+        tagline: {
             animation: `fade-drop-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy * 1.5}ms forwards`,
-            fontSize: '1.3em',
-            lineHeight: 1.1,
             marginBottom: copyGutter,
             opacity: 0,
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '1em',
+            },
             [theme.breakpoints.up('md')]: {
                 marginBottom: copyGutterMd,
-            },
-            '&> em': {
-                display: 'block',
             },
         },
         typographyDescription: {
@@ -204,7 +203,6 @@ class Home extends PureComponent {
                     >
                         <Logo
                             className={classes.logo}
-                            size="large"
                         />
                     </Grid>
                     <Grid
@@ -214,18 +212,10 @@ class Home extends PureComponent {
                         )}
                         item
                     >
-                        <Typography
-                            className={classNames(
-                                classes.typography,
-                                classes.typographySub,
-                            )}
-                            gutterBottom
-                            variant="h6"
-                        >
-                            <em>Award winning</em>
-                            {' '}
-                            interaction developer
-                        </Typography>
+                        <Tagline
+                            className={classes.tagline}
+                            size="large"
+                        />
                         <Typography
                             className={classNames(
                                 classes.typography,

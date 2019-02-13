@@ -34,8 +34,8 @@ const styles = theme => ({
         '$root:hover &': {
             transform: 'scale(1.05)',
         },
-        [theme.breakpoints.up('sm')]: {
-            flex: '0 0 30vw',
+        [theme.breakpoints.up('md')]: {
+            flex: `0 0 ${theme.layout.myWorkMediaWidth}`,
             height: '18rem',
             width: 'auto',
         },
@@ -46,9 +46,8 @@ const styles = theme => ({
         '$root:hover &': {
             transform: 'translateX(0.5rem)',
         },
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('md')]: {
             paddingLeft: '2rem',
-            willChange: 'transform',
             '$root:hover &': {
                 transform: 'translateX(1rem)',
             },

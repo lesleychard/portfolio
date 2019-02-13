@@ -1,13 +1,18 @@
 import axios from 'axios';
 import {
     CircularProgress,
+    Icon,
     Typography,
 } from '@material-ui/core';
 import {withStyles, withTheme} from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 
-import {PortfolioCard} from '../components';
+import {
+    Footer,
+    PortfolioCard,
+} from '../components';
+import {container} from '../style-utils';
 
 import portfolioData from '../../data/portfolio.yaml';
 
@@ -20,11 +25,10 @@ const styles = theme => ({
             width: '100%',
         },
     },
-    root: {
-        margin: '6rem 0 5rem 1.5rem',
-        [theme.breakpoints.up('sm')]: {
-            margin: '10vh 15vw 4rem',
-        },
+    root: {},
+    container: {
+        extend: container(theme),
+        minHeight: '100vh',
     },
     typographyH1: {
         animation: `fade-drop-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy}ms forwards`,
@@ -47,18 +51,26 @@ const styles = theme => ({
             fontSize: theme.typography.h1.fontSize,
             marginBottom: '3rem',
             paddingBottom: '3rem',
-            textAlign: 'right',
-            width: '30vw',
             '&:before': {
                 height: 3,
             },
         },
+        [theme.breakpoints.up('md')]: {
+            textAlign: 'right',
+            width: theme.layout.myWorkMediaWidth,
+        },
     },
-    loadingContainer: {
+    contentContainer: {
         animation: `fade-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy}ms forwards`,
+        margin: '2rem 1.5rem 0 0',
         opacity: 0,
         textAlign: 'center',
-        width: '30vw',
+        [theme.breakpoints.up('sm')]: {
+            margin: 0,
+        },
+        [theme.breakpoints.up('md')]: {
+            width: theme.layout.myWorkMediaWidth,
+        },
     },
     typographyLoading: {
         fontStyle: 'italic',
@@ -74,6 +86,11 @@ const styles = theme => ({
         animation: `fade-glide-right-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy}ms forwards`,
         opacity: 0,
     },
+    iconError: {
+        color: theme.palette.error.main,
+        fontSize: '3rem',
+        marginBottom: '1rem',
+    },
 });
 
 class MyWork extends PureComponent {
@@ -83,6 +100,7 @@ class MyWork extends PureComponent {
     };
 
     state = {
+        error: false,
         loading: true,
         portfolio: [],
     };
@@ -94,6 +112,13 @@ class MyWork extends PureComponent {
                 this.setState({
                     loading: false,
                     portfolio,
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+                this.setState({
+                    error: true,
+                    loading: false,
                 });
             });
     }
@@ -107,61 +132,86 @@ class MyWork extends PureComponent {
     render() {
         const {classes} = this.props;
         const {
+            error,
             loading,
             portfolio,
         } = this.state;
         return (
             <div className={classes.root}>
-                <Typography
-                    className={classes.typographyH1}
-                    variant="h1"
-                >
-                    My Work
-                </Typography>
-                {
-                    loading
-                        ? (
-                            <div className={classes.loadingContainer}>
-                                <CircularProgress color="secondary" />
-                                <Typography
-                                    className={classes.typographyLoading}
-                                    variant="caption"
-                                >
-                                    I&rsquo;ve got a lot of work to show you. Hang tight.
-                                </Typography>
-                            </div>
-                        )
-                        : (
-                            <div className={classes.portfolioCardContainer}>
-                                {
-                                    portfolio.map(
-                                        (
-                                            {
-                                                title,
-                                                slug,
-                                                description,
-                                                tags,
-                                            },
-                                            index,
-                                        ) => (
-                                            <PortfolioCard
-                                                className={classes.portfolioCard}
-                                                description={description}
-                                                key={slug}
-                                                media={`img/portfolio/${slug}/thumbnail.png`}
-                                                slug={slug}
-                                                style={{
-                                                    animationDelay: this.animationDelay(index),
-                                                }}
-                                                tags={tags}
-                                                title={title}
-                                            />
-                                        ),
-                                    )
-                                }
-                            </div>
-                        )
-                }
+                <div className={classes.container}>
+                    <Typography
+                        className={classes.typographyH1}
+                        variant="h1"
+                    >
+                        My Work
+                    </Typography>
+                    {
+                        loading
+                            ? (
+                                <div className={classes.contentContainer}>
+                                    <CircularProgress color="secondary" />
+                                    <Typography
+                                        className={classes.typographyLoading}
+                                        variant="caption"
+                                    >
+                                        I&rsquo;ve got a lot of work to show you. Hang tight.
+                                    </Typography>
+                                </div>
+                            )
+                            : (
+                                <div className={classes.portfolioCardContainer}>
+                                    {
+                                        portfolio.map(
+                                            (
+                                                {
+                                                    title,
+                                                    slug,
+                                                    description,
+                                                    tags,
+                                                },
+                                                index,
+                                            ) => (
+                                                <PortfolioCard
+                                                    className={classes.portfolioCard}
+                                                    description={description}
+                                                    key={slug}
+                                                    media={`img/portfolio/${slug}/thumbnail.png`}
+                                                    slug={slug}
+                                                    style={{
+                                                        animationDelay: this.animationDelay(index),
+                                                    }}
+                                                    tags={tags}
+                                                    title={title}
+                                                />
+                                            ),
+                                        )
+                                    }
+                                </div>
+                            )
+                    }
+                    {
+                        error
+                            ? (
+                                <div className={classes.contentContainer}>
+                                    <Icon className={classes.iconError}>
+                                        thumb_down
+                                    </Icon>
+                                    <Typography
+                                        gutterBottom
+                                        variant="h2"
+                                    >
+                                        Well, this is awkward.
+                                    </Typography>
+                                    <Typography>
+                                        Something went wrong trying to fetch all that work.
+                                        Have you tried turning it off and on again?
+                                    </Typography>
+                                </div>
+                            )
+                            : null
+                    }
+                </div>
+                <Footer />
             </div>
         );
     }

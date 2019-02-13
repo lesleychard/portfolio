@@ -48,7 +48,7 @@ const styles = theme => ({
             flexDirection: 'row',
         },
     },
-    vertical: {
+    horizontal: {
         flexDirection: 'row',
     },
     li: {
@@ -80,10 +80,12 @@ const styles = theme => ({
 
 class SocialLinks extends PureComponent {
     static defaultProps = {
-        direction: DIRECTION_HORIZONTAL,
+        className: null,
+        direction: DIRECTION_VERTICAL,
     };
 
     static propTypes = {
+        className: PropTypes.string,
         classes: PropTypes.object.isRequired,
         direction: PropTypes.oneOf([
             DIRECTION_HORIZONTAL,
@@ -93,6 +95,7 @@ class SocialLinks extends PureComponent {
 
     render() {
         const {
+            className: classNameProp,
             classes,
             direction,
         } = this.props;
@@ -101,8 +104,9 @@ class SocialLinks extends PureComponent {
                 className={classNames(
                     classes.root,
                     {
-                        [classes.vertical]: direction === DIRECTION_VERTICAL,
+                        [classes.horizontal]: direction === DIRECTION_HORIZONTAL,
                     },
+                    classNameProp,
                 )}
             >
                 {
@@ -114,7 +118,7 @@ class SocialLinks extends PureComponent {
                                 classes={{
                                     tooltip: classes.tooltip,
                                 }}
-                                placement={direction === DIRECTION_VERTICAL ? 'bottom' : 'left'}
+                                placement={direction === DIRECTION_HORIZONTAL ? 'bottom' : 'left'}
                                 title={tooltip}
                                 TransitionComponent={Fade}
                                 // open

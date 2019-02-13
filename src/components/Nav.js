@@ -13,6 +13,7 @@ import {
     LOCATION_MY_WORK,
     LOCATION_WHAT_I_DO,
 } from '../location';
+import {stripUl} from '../style-utils';
 
 const styles = theme => ({
     root: {
@@ -25,9 +26,7 @@ const styles = theme => ({
         zIndex: 1,
     },
     ul: {
-        listStyle: 'none',
-        margin: 0,
-        padding: 0,
+        extend: stripUl,
     },
     li: {
         display: 'inline-block',
