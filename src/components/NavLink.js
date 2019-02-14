@@ -10,12 +10,16 @@ import {NavLink as RouterNavLink} from 'react-router-dom';
 import {fontSmooth} from '../style-utils';
 
 const DIRECTION_BOTTOM = 'bottom';
+const DIRECTION_BOTTOM_LEFT = 'bottom-left';
+const DIRECTION_BOTTOM_RIGHT = 'bottom-right';
 const DIRECTION_LEFT = 'left';
 const DIRECTION_RIGHT = 'right';
 const DIRECTION_TOP = 'top';
 
 const DIRECTIONS = [
     DIRECTION_BOTTOM,
+    DIRECTION_BOTTOM_LEFT,
+    DIRECTION_BOTTOM_RIGHT,
     DIRECTION_LEFT,
     DIRECTION_RIGHT,
     DIRECTION_TOP,
@@ -32,6 +36,9 @@ const styles = (theme) => {
     const rightTransformRotate = 'rotate(90deg)';
     const rightTransformTranslate = 'translateY(-30%)';
 
+    const filledPadding = '0.75em 1.2em';
+    const bottomPadding = '0 0 1.35em';
+
     return {
         root: {
             background: theme.palette.common.black,
@@ -40,7 +47,7 @@ const styles = (theme) => {
             display: 'inline-block',
             fontSize: '1em',
             fontWeight: theme.typography.fontWeightMedium,
-            padding: '0.75em 1.2em',
+            padding: filledPadding,
             pointerEvents: 'all',
             position: 'relative',
             textDecoration: 'none',
@@ -57,11 +64,34 @@ const styles = (theme) => {
         },
         bottom: {
             background: 'transparent',
-            padding: '0 0 1.35em',
+            padding: bottomPadding,
             '&:hover': {
                 transform: 'translateY(15%)',
                 '& $icon': {
                     transform: `translateY(${iconHoverTranslateY})`,
+                },
+            },
+        },
+        bottomRight: {},
+        bottomLeft: {
+            background: theme.palette.common.black,
+            padding: filledPadding,
+            transform: `${leftTransformRotate} translateY(100%)`,
+            transformOrigin: 'bottom left',
+            '& $icon': {
+                display: 'none',
+                marginBottom: 0,
+                transform: 'rotate(-135deg) translateY(-25%)',
+            },
+            '&:hover $icon': {
+                transform: 'rotate(-135deg) translateY(-40%)',
+            },
+            [theme.breakpoints.up('sm')]: {
+                background: 'transparent',
+                padding: bottomPadding,
+                transform: 'none',
+                '& $icon': {
+                    display: 'block',
                 },
             },
         },
@@ -138,12 +168,21 @@ class NavLink extends PureComponent {
             direction,
             ...other
         } = this.props;
+
+        const directionBottom = (
+            direction === DIRECTION_BOTTOM
+            || direction === DIRECTION_BOTTOM_LEFT
+            || direction === DIRECTION_BOTTOM_RIGHT
+        );
+
         return (
             <RouterNavLink
                 className={classNames(
                     classes.root,
                     {
-                        [classes.bottom]: direction === DIRECTION_BOTTOM,
+                        [classes.bottom]: directionBottom,
+                        [classes.bottomLeft]: direction === DIRECTION_BOTTOM_LEFT,
+                        [classes.bottomRight]: direction === DIRECTION_BOTTOM_RIGHT,
                         [classes.left]: direction === DIRECTION_LEFT,
                         [classes.right]: direction === DIRECTION_RIGHT,
                         [classes.top]: direction === DIRECTION_TOP,
@@ -156,7 +195,7 @@ class NavLink extends PureComponent {
                     className={classNames(
                         classes.icon,
                         {
-                            [classes.iconBottom]: direction === DIRECTION_BOTTOM,
+                            [classes.iconBottom]: directionBottom,
                         },
                     )}
                 >

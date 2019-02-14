@@ -11,166 +11,175 @@ import {
     NavLink,
     Logo,
     SocialLinks,
+    Tagline,
 } from '../components';
 import {LOCATION_WHAT_I_DO} from '../location';
 import {fontSmooth} from '../style-utils';
 
 
-const styles = theme => ({
-    '@keyframes home-root-before-in': {
-        from: {
-            transform: 'translateX(100%)',
-        },
-        to: {
-            transform: 'translateX(0)',
-        },
-    },
-    root: {
-        alignItems: 'flex-end',
-        display: 'flex',
-        height: '100vh',
-        justifyContent: 'center',
-        '&:before': {
-            animation: `$home-root-before-in ${theme.transitions.duration.copy * 2}ms ${theme.transitions.duration.copy * 1.5}ms forwards`,
-            background: theme.palette.common.white,
-            content: '""',
-            display: 'none',
-            height: 3,
-            left: '50%',
-            position: 'absolute',
-            right: 0,
-            top: 'calc(60vh - 14rem)',
-            transform: 'translateX(100%)',
-        },
-        [theme.breakpoints.up('md')]: {
-            alignItems: 'center',
-        },
-        [theme.breakpoints.up('lg')]: {
-            alignItems: 'flex-end',
-            '&:before': {
-                display: 'block',
+const styles = (theme) => {
+    const gridContainerBottomOffset = '20vh';
+
+    const copyWidth = '80vw';
+    const copyWidthSm = '20rem';
+
+    const copyGutter = '2rem';
+    const copyGutterMd = '4rem';
+
+    return {
+        '@keyframes home-root-before-in': {
+            from: {
+                transform: 'translateX(100%)',
+            },
+            to: {
+                transform: 'translateX(0)',
             },
         },
-    },
-    gridContainer: {
-        alignItems: 'flex-end',
-        flexDirection: 'column',
-        flexWrap: 'wrap',
-        marginBottom: '2rem',
-        maxWidth: '50rem',
-        [theme.breakpoints.up('sm')]: {
-            alignItems: 'center',
-            marginBottom: '20vh',
-        },
-        [theme.breakpoints.up('md')]: {
-            alignItems: 'flex-start',
-            flexDirection: 'row',
-            flexWrap: 'no-wrap',
-            marginBottom: 0,
-            width: '75%',
-        },
-        [theme.breakpoints.up('lg')]: {
-            marginBottom: '20vh',
-        },
-    },
-    gridItem: {
-        flex: '0 0 50%',
-        [theme.breakpoints.up('md')]: {
-            paddingTop: '2rem',
-        },
-    },
-    gridItemLogo: {
-        [theme.breakpoints.up('md')]: {
-            paddingRight: '2rem',
-        },
-    },
-    logo: {
-        animation: `fade-glide-right-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy}ms forwards`,
-        height: 75,
-        opacity: 0,
-        width: '80vw',
-        [theme.breakpoints.up('sm')]: {
-            width: '20rem',
-        },
-        [theme.breakpoints.up('md')]: {
-            height: 52,
-            width: '100%',
-        },
-    },
-    gridItemCopy: {
-        width: '80vw',
-        paddingRight: '1.5em',
-        [theme.breakpoints.up('sm')]: {
-            paddingRight: 0,
-            width: '20rem',
-        },
-        [theme.breakpoints.up('md')]: {
-            width: 'auto',
-        },
-    },
-    typography: {
-        color: theme.palette.common.white,
-        extend: fontSmooth,
-        fontSize: '1em',
-        '&> strong': {
-            display: 'inline-block',
-            position: 'relative',
-            fontWeight: theme.typography.fontWeightRegular,
+        root: {
+            alignItems: 'flex-end',
+            display: 'flex',
+            height: '100vh',
+            justifyContent: 'center',
             '&:before': {
-                background: theme.palette.common.black,
-                bottom: '0.3em',
+                animation: `$home-root-before-in ${theme.transitions.duration.copy * 2}ms ${theme.transitions.duration.copy * 1.5}ms forwards`,
+                background: theme.palette.common.white,
                 content: '""',
-                display: 'block',
-                left: 0,
+                display: 'none',
+                height: 3,
+                left: '50%',
                 position: 'absolute',
                 right: 0,
-                top: '0.45em',
-                zIndex: -1,
+                top: 'calc(60vh - 14rem)',
+                transform: 'translateX(100%)',
+            },
+            [theme.breakpoints.up('md')]: {
+                alignItems: 'center',
+            },
+            [theme.breakpoints.up('lg')]: {
+                alignItems: 'flex-end',
+                '&:before': {
+                    display: 'block',
+                },
             },
         },
-    },
-    typographySub: {
-        animation: `fade-drop-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy * 1.5}ms forwards`,
-        fontSize: '1.3em',
-        lineHeight: 1.1,
-        marginBottom: '2rem',
-        opacity: 0,
-        [theme.breakpoints.up('md')]: {
-            marginBottom: '4rem',
+        gridContainer: {
+            alignItems: 'flex-end',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            marginBottom: copyGutter,
+            maxWidth: '50rem',
+            [theme.breakpoints.up('sm')]: {
+                alignItems: 'center',
+                marginBottom: gridContainerBottomOffset,
+            },
+            [theme.breakpoints.up('md')]: {
+                alignItems: 'flex-start',
+                flexDirection: 'row',
+                flexWrap: 'no-wrap',
+                marginBottom: 0,
+                width: '75%',
+            },
+            [theme.breakpoints.up('lg')]: {
+                marginBottom: gridContainerBottomOffset,
+            },
         },
-        '&> em': {
-            display: 'block',
+        gridItem: {
+            flex: '0 0 50%',
+            [theme.breakpoints.up('md')]: {
+                paddingTop: copyGutter,
+            },
         },
-    },
-    typographyDescription: {
-        animation: `fade-drop-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy * 1.7}ms forwards`,
-        opacity: 0,
-    },
-    navLinkContainer: {
-        marginTop: '2rem',
-        willChange: 'opacity',
-        [theme.breakpoints.up('md')]: {
-            animation: `fade-drop-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy * 1.9}ms forwards`,
-            marginTop: '4rem',
+        gridItemLogo: {
+            [theme.breakpoints.up('md')]: {
+                paddingRight: copyGutter,
+            },
+        },
+        logo: {
+            animation: `fade-glide-right-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy}ms forwards`,
+            height: 75,
+            opacity: 0,
+            width: copyWidth,
+            [theme.breakpoints.up('sm')]: {
+                width: copyWidthSm,
+            },
+            [theme.breakpoints.up('md')]: {
+                height: 52,
+                width: '100%',
+            },
+        },
+        gridItemCopy: {
+            width: copyWidth,
+            paddingRight: '1.5em',
+            [theme.breakpoints.up('sm')]: {
+                paddingRight: 0,
+                width: copyWidthSm,
+            },
+            [theme.breakpoints.up('md')]: {
+                width: 'auto',
+            },
+        },
+        typography: {
+            color: theme.palette.common.white,
+            extend: fontSmooth,
+            fontSize: '1em',
+            '&> strong': {
+                display: 'inline-block',
+                position: 'relative',
+                fontWeight: theme.typography.fontWeightRegular,
+                '&:before': {
+                    background: theme.palette.common.black,
+                    bottom: '0.3em',
+                    content: '""',
+                    display: 'block',
+                    left: 0,
+                    position: 'absolute',
+                    right: 0,
+                    top: '0.45em',
+                    zIndex: -1,
+                },
+            },
+        },
+        tagline: {
+            animation: `fade-drop-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy * 1.5}ms forwards`,
+            marginBottom: copyGutter,
+            opacity: 0,
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '1em',
+            },
+            [theme.breakpoints.up('md')]: {
+                marginBottom: copyGutterMd,
+            },
+        },
+        typographyDescription: {
+            animation: `fade-drop-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy * 1.7}ms forwards`,
             opacity: 0,
         },
-    },
-    gridItemSocialLinks: {
-        alignSelf: 'flex-start',
-        left: '20vw',
-        marginLeft: -theme.spacing.unit,
-        position: 'relative',
-        order: -1,
-        zIndex: 1,
-        [theme.breakpoints.up('sm')]: {
-            left: 'auto',
-            marginLeft: 0,
-            position: 'absolute',
-            top: '1rem',
-            right: '1rem',
+        navLinkContainer: {
+            marginTop: copyGutter,
+            willChange: 'opacity',
+            [theme.breakpoints.up('md')]: {
+                animation: `fade-drop-in ${theme.transitions.duration.copy}ms ${theme.transitions.duration.copy * 1.9}ms forwards`,
+                marginTop: copyGutterMd,
+                opacity: 0,
+            },
         },
-    },
-});
+        gridItemSocialLinks: {
+            alignSelf: 'flex-start',
+            left: '20vw',
+            marginLeft: -theme.spacing.unit,
+            position: 'relative',
+            order: -1,
+            zIndex: 1,
+            [theme.breakpoints.up('sm')]: {
+                left: 'auto',
+                marginLeft: 0,
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+            },
+        },
+    };
+};
 
 class Home extends PureComponent {
     static propTypes = {
@@ -194,7 +203,6 @@ class Home extends PureComponent {
                     >
                         <Logo
                             className={classes.logo}
-                            size="large"
                         />
                     </Grid>
                     <Grid
@@ -204,18 +212,10 @@ class Home extends PureComponent {
                         )}
                         item
                     >
-                        <Typography
-                            className={classNames(
-                                classes.typography,
-                                classes.typographySub,
-                            )}
-                            gutterBottom
-                            variant="h6"
-                        >
-                            <em>Award winning</em>
-                            {' '}
-                            interaction developer
-                        </Typography>
+                        <Tagline
+                            className={classes.tagline}
+                            size="large"
+                        />
                         <Typography
                             className={classNames(
                                 classes.typography,

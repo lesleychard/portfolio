@@ -19,6 +19,7 @@ const server = new WebpackDevServer(compiler, {
     hot: true,
     open: true,
     quiet: true,
+    watchContentBase: true,
     watchOptions: {
         ignored: /node_modules/,
     },

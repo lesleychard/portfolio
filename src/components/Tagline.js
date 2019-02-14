@@ -1,56 +1,54 @@
 import classNames from 'classnames';
+import {Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/styles';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 
-const LOGO_IMG = require('../assets/svg/logo.svg');
+import {fontSmooth} from '../style-utils';
 
-const styles = {
+const styles = theme => ({
     root: {
-        background: `url("${LOGO_IMG}") no-repeat center center`,
-        backgroundSize: 'contain',
-        fontSize: 0,
-        maxWidth: '100%',
+        color: theme.palette.common.white,
+        extend: fontSmooth,
+        '&> em': {
+            display: 'block',
+        },
     },
     sizeSmall: {
-        width: 185,
-        height: 30,
+        fontSize: '0.85em',
+        lineHeight: 1,
     },
     sizeMedium: {
-        width: 250,
-        height: 39,
+        fontSize: '1em',
+        lineHeight: 1.1,
     },
     sizeLarge: {
-        width: 340,
-        height: 52,
+        fontSize: '1.3em',
+        lineHeight: 1.1,
     },
-};
+});
 
-class Logo extends PureComponent {
+class Tagline extends PureComponent {
     static defaultProps = {
         className: null,
-        component: 'h1',
         size: 'medium',
     };
 
     static propTypes = {
-        classes: PropTypes.object.isRequired,
         className: PropTypes.string,
-        component: PropTypes.string,
+        classes: PropTypes.object.isRequired,
         size: PropTypes.oneOf(['small', 'medium', 'large']),
     };
 
     render() {
         const {
-            classes,
             className: classNameProp,
-            component,
+            classes,
             size,
-            ...other
         } = this.props;
-        const Component = component;
+
         return (
-            <Component
+            <Typography
                 className={classNames(
                     classes.root,
                     {
@@ -60,12 +58,16 @@ class Logo extends PureComponent {
                     },
                     classNameProp,
                 )}
-                {...other}
+                component="p"
+                gutterBottom
+                variant="h6"
             >
-                Lesley Chard
-            </Component>
+                <em>Award winning</em>
+                {' '}
+                interaction developer
+            </Typography>
         );
     }
 }
 
-export default withStyles(styles)(Logo);
+export default withStyles(styles)(Tagline);

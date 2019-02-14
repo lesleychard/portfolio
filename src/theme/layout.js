@@ -1,5 +1,5 @@
 const layout = {
-    // homeOffset: '47vh',
+    myWorkMediaWidth: '30vw',
 };
 
 export default layout;

@@ -69,6 +69,15 @@ module.exports = {
                 },
             },
             {
+                test: /\.svg$/,
+                use: {
+                    loader: 'svg-url-loader',
+                    options: {
+                        noquotes: true,
+                    },
+                },
+            },
+            {
                 test: /\.json$/,
                 use: [
                     {
@@ -77,13 +86,12 @@ module.exports = {
                 ],
             },
             {
-                test: /\.svg$/,
-                use: {
-                    loader: 'svg-url-loader',
-                    options: {
-                        noquotes: true,
+                test: /\.(yml|yaml)$/,
+                use: [
+                    {
+                        loader: 'yaml-loader',
                     },
-                },
+                ],
             },
         ],
     },
