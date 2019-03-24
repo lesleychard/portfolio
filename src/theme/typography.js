@@ -6,7 +6,7 @@ const typography = {
         fontSize: '2.8rem',
     },
     h2: {
-        fontSize: '2rem',
+        fontSize: '1.75rem',
     },
 };
 

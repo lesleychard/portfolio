@@ -35,11 +35,18 @@ export default function Routes() {
                             />
                         )}
                         right={(
-                            <Route
-                                exact
-                                path={`/${LOCATION_MY_WORK}`}
-                                component={MyWork}
-                            />
+                            <>
+                                <Route
+                                    exact
+                                    path={`/${LOCATION_MY_WORK}`}
+                                    component={MyWork}
+                                />
+                                <Route
+                                    exact
+                                    path={`/${LOCATION_MY_WORK}/:id`}
+                                    component={MyWork}
+                                />
+                            </>
                         )}
                         left={(
                             <Route

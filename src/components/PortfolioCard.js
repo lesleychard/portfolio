@@ -1,5 +1,6 @@
 import axios from 'axios';
 import classNames from 'classnames';
+
 import {
     ButtonBase,
     CircularProgress,
@@ -11,6 +12,7 @@ import {
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 
+import history from '../history';
 import {LOCATION_MY_WORK} from '../location';
 
 import tagData from '../../data/tags.yaml';
@@ -166,7 +168,7 @@ class PortfolioCard extends PureComponent {
 
     openLink = () => {
         const {slug} = this.props;
-        window.location = `${LOCATION_MY_WORK}/${slug}`;
+        history.push(`${LOCATION_MY_WORK}/${slug}`);
     };
 
     render() {
@@ -240,7 +242,6 @@ class PortfolioCard extends PureComponent {
                         {description}
                     </Typography>
                     <ButtonBase
-
                         className={classes.buttonView}
                     >
                         View

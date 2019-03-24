@@ -61,6 +61,7 @@ const styles = (theme) => {
             background: `linear-gradient(45deg, ${theme.palette.primary.light}, ${theme.palette.primary.dark})`,
             color: theme.palette.primary.contrastText,
             extend: fontSmooth,
+            overflow: 'hidden',
             '& a': {
                 color: theme.palette.primary.contrastText,
                 textDecoration: 'none',

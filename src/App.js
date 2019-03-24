@@ -1,14 +1,15 @@
 import React, {Fragment} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {Router, Route} from 'react-router-dom';
 
 import {Nav} from './components';
+import history from './history';
 import Routes from './Routes';
 import {Theme} from './theme';
 
 export default function App() {
     return (
         <Theme>
-            <Router>
+            <Router history={history}>
                 <Fragment>
                     <Route path="/" component={Nav} />
                     <Routes />

@@ -13,9 +13,7 @@ const compiler = Webpack(config);
 const server = new WebpackDevServer(compiler, {
     contentBase: paths.public,
     compress: true,
-    historyApiFallback: {
-        index: 'public/',
-    },
+    historyApiFallback: true,
     hot: true,
     open: true,
     quiet: true,

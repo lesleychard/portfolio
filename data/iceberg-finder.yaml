@@ -1,0 +1,32 @@
+- title: IcebergFinder.com
+  url: http://icebergfinder.com
+  launchDate: May 2018
+  collab: 
+    - title: Target Marketing
+      href: http://google.ca
+  intro:
+    - Hello world!
+    - Hello world!
+  gallery:
+    - src: gallery1.png
+      alt: Iceberg Finder 1
+      cols: 2
+    - src: gallery2.png
+      alt: Iceberg Finder 2
+    - src: gallery3.png
+      alt: Iceberg Finder 3
+    - src: gallery4.png
+      alt: Iceberg Finder 4
+      cols: 2
+    - src: gallery5.png
+      alt: Iceberg Finder 5
+      cols: 2
+  myRole:
+    - Lorem ipsum dolor sit amet.
+  awards:
+    - title: Applied Arts Mag
+      href: http://google.ca
+    - title: Globe & Mail
+      href: http://google.ca
+    - title: CBC
+      href: http://google.ca
