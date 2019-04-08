@@ -210,6 +210,7 @@ class Layout extends PureComponent {
             right,
         } = this.props;
         const centerActive = location.pathname === '/' || location.pathname === `/${LOCATION_WHAT_I_DO}`;
+        const rightActive = location.pathname.substring(0, 8) === `/${LOCATION_MY_WORK}`;
         return (
             <div className={classes.root}>
                 <div
@@ -218,7 +219,7 @@ class Layout extends PureComponent {
                         {
                             [classes.containerActiveCenter]: centerActive,
                             [classes.containerActiveLeft]: location.pathname === `/${LOCATION_BACKGROUND}`,
-                            [classes.containerActiveRight]: location.pathname === `/${LOCATION_MY_WORK}`,
+                            [classes.containerActiveRight]: rightActive,
                         },
                     )}
                 >

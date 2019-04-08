@@ -20,5 +20,10 @@ module.exports = {
         require.resolve('./config/eslint/react.js'),
     ],
     rules: {
+        'brace-style': [
+            'error',
+            'stroustrup',
+            {allowSingleLine: true},
+        ],
     },
 };

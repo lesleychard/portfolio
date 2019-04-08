@@ -16,7 +16,7 @@ const globals = theme => ({
             },
         },
         a: {
-            color: theme.palette.primary.main,
+            color: theme.palette.primary.secondary,
         },
     },
 });

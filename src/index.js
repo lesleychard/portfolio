@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 // temporary workaround for MUI transitionary period
 import './bootstrap';
 

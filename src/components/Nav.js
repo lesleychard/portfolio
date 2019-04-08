@@ -137,7 +137,7 @@ class Nav extends PureComponent {
                             classes.li,
                             classes.liRight,
                             {
-                                [classes.liVisible]: location.pathname !== `/${LOCATION_MY_WORK}`,
+                                [classes.liVisible]: location.pathname.substring(0, 8) !== `/${LOCATION_MY_WORK}`,
                             },
                         )}
                     >
